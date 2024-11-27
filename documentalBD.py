@@ -1,3 +1,4 @@
+from string2Dic import Str2Dic
 
 
 class Documento:
@@ -59,8 +60,38 @@ class BaseDeDatosDocumental:
             
     def obtener_coleccion(self, nombre_coleccion):
         return self.colecciones.get(nombre_coleccion, None)
+
+    def import_csv(self, nombre_coleccion, ruta):
+        try:
+            with open(ruta, 'r') as file:
+                schema = file.readline().strip() #lee primera linea
+                str2dic = Str2Dic(schema) #crea Obj 
+                linea = file.readline().strip()
+                
+                id=1
+                while linea != "":
+                    d = str2dic.convert(linea)  #asigno clave, valor Nombre: Juan
+                    
+                    documento = Documento(id, d)  #Crear un documento. Pongan un id incremental.
+                    nombre_coleccion.añadir_documento(documento)    # Agregar el documento a la colección.
+                    
+                    linea = file.readline().strip() #corta en los espacios en blanco strip()
+                    
+                    id=id+1
+                    
+                    
+                    # Retornar la colección
+                
+                
+        except FileNotFoundError:
+            print("Archivo no encontrado")
+        
+    
+    
     
     def __str__(self):
         return f"Base de datos documental con {len(self.colecciones)} colecciones"
+    
+
     
 

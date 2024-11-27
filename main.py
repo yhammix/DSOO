@@ -30,14 +30,14 @@ def main():
         
         elif opcion == "2":
             nombre_coleccion = input("Ingrese el nombre de la colección: ")
-            collection = db.get_collection(nombre_coleccion)
+            collection = db.obtener_coleccion(nombre_coleccion)
             ruta_csv = input("Ingrese la ruta del archivo CSV: ")
-            collection.import_csv(nombre_coleccion, ruta_csv)
+            db.import_csv(collection, ruta_csv)     #obj collection
         
         elif opcion == "3":
             nombre_coleccion = input("Ingrese el nombre de la colección: ")
             doc_id = input("Ingrese el ID del documento: ")
-            coleccion = db.get_collection(nombre_coleccion)
+            coleccion = db.obtener_coleccion(nombre_coleccion)
             if coleccion:
                 documento = coleccion.get_document(doc_id)
                 if documento:
@@ -77,4 +77,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+            
             
