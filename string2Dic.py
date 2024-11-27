@@ -2,7 +2,7 @@
 
 class Str2Dic():
 
-    def init(self , schemaStr,separator=","):
+    def __init__(self , schemaStr,separator=","):
         self.schema=schemaStr.split(separator)
         self.separator=separator
         

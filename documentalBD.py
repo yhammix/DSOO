@@ -34,8 +34,8 @@ class Coleccion:
     def añadir_documento(self, documento):
         self.documentos[documento.id] = documento
         
-    def eliminar_documento(self, id_documenro):
-        if id_documento in self.documentos:
+    def eliminar_documento(self, id_documento):
+        if id_documento in self.documentos: 
             del self.documentos[id_documento]
             
     def buscar_documento(self, id_documento):
@@ -43,6 +43,9 @@ class Coleccion:
         
     def __str__(self):
         return f"Colección {self.nombre} con {len(self.documentos)} documentos"
+    
+    def listar_documents(self):
+        return list(self.documentos.values())
     
     
 class BaseDeDatosDocumental:
@@ -65,14 +68,14 @@ class BaseDeDatosDocumental:
         try:
             with open(ruta, 'r') as file:
                 schema = file.readline().strip() #lee primera linea
-                str2dic = Str2Dic(schema) #crea Obj 
+                str2dic = Str2Dic(schema)   #crea Obj 
                 linea = file.readline().strip()
                 
                 id=1
                 while linea != "":
                     d = str2dic.convert(linea)  #asigno clave, valor Nombre: Juan
                     
-                    documento = Documento(id, d)  #Crear un documento. Pongan un id incremental.
+                    documento = Documento(int(id), d) #documento = Documento(id, d)     #Crear un documento. Pongan un id incremental.
                     nombre_coleccion.añadir_documento(documento)    # Agregar el documento a la colección.
                     
                     linea = file.readline().strip() #corta en los espacios en blanco strip()
